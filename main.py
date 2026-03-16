@@ -1,24 +1,42 @@
-def show_menu():
-    print("\n=== Vault Menu ===")
-    print("1. データを追加")
-    print("2. 集計を見る")
-    print("3. 終了")
+import tkinter as tk
+from PIL import Image, ImageTk
 
 def main():
-    print("Vault is ready to start!")
-    while True:
-        show_menu()
-        choice = input("番号を選んでください: ")
+    root = tk.Tk()
+    root.title("Vault")
+    root.geometry("400x500")
+    root.configure(bg="#f0f8f8")  # 優しい背景色
 
-        if choice == "1":
-            print("データ追加機能はまだ準備中です。")
-        elif choice == "2":
-            print("集計機能はまだ準備中です。")
-        elif choice == "3":
-            print("Vault を終了します。")
-            break
-        else:
-            print("無効な入力です。もう一度選んでください。")
+    # --- ヘッダー（ロゴ） ---
+    image = Image.open("vault_logo.png")
+    image = image.resize((120, 120))
+    logo = ImageTk.PhotoImage(image)
+
+    logo_label = tk.Label(root, image=logo, bg="#f0f8f8")
+    logo_label.image = logo
+    logo_label.pack(pady=20)
+
+    # --- メインメニュー（ボタン） ---
+    button_frame = tk.Frame(root, bg="#f0f8f8")
+    button_frame.pack(pady=10)
+
+    btn_add = tk.Button(button_frame, text="データを追加", width=20, height=2)
+    btn_add.pack(pady=5)
+
+    btn_view = tk.Button(button_frame, text="集計を見る", width=20, height=2)
+    btn_view.pack(pady=5)
+
+    btn_settings = tk.Button(button_frame, text="設定", width=20, height=2)
+    btn_settings.pack(pady=5)
+
+    btn_exit = tk.Button(button_frame, text="終了", width=20, height=2, command=root.quit)
+    btn_exit.pack(pady=5)
+
+    # --- フッター ---
+    footer = tk.Label(root, text="Your data stays with you.", bg="#f0f8f8", fg="#555")
+    footer.pack(side="bottom", pady=10)
+
+    root.mainloop()
 
 if __name__ == "__main__":
     main()
